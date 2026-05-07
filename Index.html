@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PURE NATTY</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: limegreen;
+      filter: blur(180px);
+      opacity: 0.2;
+      top: -150px;
+      left: -150px;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: greenyellow;
+      filter: blur(180px);
+      opacity: 0.1;
+      bottom: -150px;
+      right: -150px;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo h1 {
+      color: #4dff88;
+      font-size: 38px;
+      letter-spacing: 4px;
+    }
+
+    .logo p {
+      color: gray;
+      font-size: 12px;
+      letter-spacing: 3px;
+    }
+
+    .start-btn {
+      background: #4dff88;
+      color: black;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    .hero h2 {
+      font-size: 70px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .hero span {
+      color: #4dff88;
+    }
+
+    .hero p {
+      color: #b0b0b0;
+      margin-top: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 18px;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .sidebar {
+      width: 320px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 25px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+    }
+
+    .sidebar h3 {
+      color: #4dff88;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .feature {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 15px;
+      border-radius: 18px;
+      margin-bottom: 12px;
+      transition: 0.3s;
+    }
+
+    .feature:hover {
+      background: rgba(77,255,136,0.1);
+    }
+
+    .motivation {
+      margin-top: 25px;
+      background: linear-gradient(to bottom right, rgba(77,255,136,0.2), rgba(173,255,47,0.05));
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(77,255,136,0.2);
+    }
+
+    .chat-box {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 25px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.3);
+    }
+
+    .chat-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      background: #4dff88;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .messages {
+      padding: 20px;
+      height: 500px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .bot-message,
+    .user-message {
+      max-width: 75%;
+      padding: 16px 20px;
+      border-radius: 22px;
+      line-height: 1.5;
+    }
+
+    .bot-message {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      align-self: flex-start;
+    }
+
+    .user-message {
+      background: #4dff88;
+      color: black;
+      align-self: flex-end;
+      font-weight: bold;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 12px;
+      padding: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.3);
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 15px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.4);
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .input-area button {
+      padding: 15px 24px;
+      border: none;
+      border-radius: 18px;
+      background: #4dff88;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .input-area button:hover {
+      transform: scale(1.05);
+    }
+
+    @media(max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
+
+      .hero h2 {
+        font-size: 45px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <h1>PURE NATTY</h1>
+      <p>BODYBUILDING AI COACH</p>
+    </div>
+
+    <button class="start-btn">START TRAINING</button>
+  </header>
+
+  <section class="hero">
+    <h2>Train Hard.<br>Stay <span>PURE</span>.</h2>
+    <p>
+      Your AI bodybuilding assistant for muscle gain, fat loss, workout plans,
+      nutrition advice, and aesthetic improvement.
+    </p>
+  </section>
+
+  <div class="container">
+
+    <div class="sidebar">
+      <h3>AI Features</h3>
+
+      <div class="feature">Workout Programs</div>
+      <div class="feature">Muscle Gain Tips</div>
+      <div class="feature">Fat Loss Guidance</div>
+      <div class="feature">Nutrition Advice</div>
+      <div class="feature">Recovery & Sleep</div>
+      <div class="feature">Natural Bodybuilding</div>
+
+      <div class="motivation">
+        <strong>Daily Motivation</strong>
+        <p style="margin-top:10px; color:#ddd;">
+          “Discipline creates the physique.”
+        </p>
+      </div>
+    </div>
+
+    <div class="chat-box">
+
+      <div class="chat-header">
+        <div class="chat-title">
+          <div class="avatar">PN</div>
+
+          <div>
+            <h3>PURE NATTY AI</h3>
+            <p style="color:#4dff88; font-size:14px;">Online • Ready To Coach</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="messages" id="messages">
+        <div class="bot-message">
+          Welcome to PURE NATTY 💪 Ask me anything about bodybuilding,
+          workouts, nutrition, muscle gain, or fat loss.
+        </div>
+
+        <div class="user-message">
+          Best workout split for muscle gain?
+        </div>
+
+        <div class="bot-message">
+          Push Pull Legs or Upper Lower split works great for natural lifters.
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="Ask PURE NATTY anything...">
+        <button onclick="sendMessage()">SEND</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const messages = document.getElementById('messages');
+
+      if(input.value.trim() === '') return;
+
+      const userMsg = document.createElement('div');
+      userMsg.className = 'user-message';
+      userMsg.innerText = input.value;
+      messages.appendChild(userMsg);
+
+      const botMsg = document.createElement('div');
+      botMsg.className = 'bot-message';
+      botMsg.innerText = 'PURE NATTY AI is thinking about the perfect bodybuilding advice...';
+
+      setTimeout(() => {
+        messages.appendChild(botMsg);
+        messages.scrollTop = messages.scrollHeight;
+      }, 500);
+
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
